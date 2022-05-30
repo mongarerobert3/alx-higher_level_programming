@@ -3,4 +3,4 @@
 number = 3.14159
 
 number = float(number)
-print ('{:.2f}'.format(3.1415))
+print ("Float: {:.2f}".format(3.1415))

@@ -2,4 +2,4 @@
 
 #Write a Shell script that runs a Python script.
 
-print("Hello, World!")
+python3 $PYFILE

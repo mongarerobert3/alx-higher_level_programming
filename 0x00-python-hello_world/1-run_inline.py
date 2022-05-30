@@ -2,4 +2,4 @@
 
 #a script that runs a python code
 
-print(f"")
+python3 -c $PYCODE

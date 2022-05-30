@@ -1,5 +1,3 @@
-#!/usr/bin/python3
-
+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
 #a script that runs a python code
-
 python3 -c $PYCODE

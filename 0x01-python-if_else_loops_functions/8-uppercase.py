@@ -1,11 +1,27 @@
 #!/usr/bin/python3
 
 
+def islower(c):
+    """
+    Checks if a given character is in lowercase
+    Arguments:
+        c: character
+    Return:
+        True if c is lowercase. False otherwise
+    """
+    return ord('a') <= ord(c) <= ord('z')
+
+
 def uppercase(str):
-    result = ''
-    for char in str:
-        if ord(char) >= 97 and ord(char) <= 122:
-            result += chr(ord(char) - 32)
-        else:
-            result += char
-        print("{:s}".format(result))
+    """
+    Prints a string in uppercase followed by a new line
+    Arguments:
+        str: string
+    Return:
+        None
+    """
+    for c in str:
+        value = ord(c) - 32 if islower(c) else ord(c)
+        print("{:c}".format(value), end="")
+
+    print()

@@ -13,7 +13,7 @@ if __name__ == "__main__":
         print("Unknown operator. Available operators: +, -, * and /")
         sys.exit(1)
 
-    #choose operation
+    # choose operation
 
     a, opp, b = sys.argv[1:]
 
@@ -27,5 +27,5 @@ if __name__ == "__main__":
         sys.argv[2] == '/'
         func = div
 
-    #perform calculation
+# perform calculation
 print("{} {} {} = {:d}".format(a, opp, b, func(int(a), int(b))))

@@ -1,5 +1,5 @@
-#ifndef _DOUBLY_LINKED_LISTS_
-#define _DOUBLY_LINKED_LISTS_
+#ifndef _LISTS_
+#define _LISTS_
 
 
 /**
@@ -9,7 +9,7 @@
  * @next: points to the next node
  *
  * Description: doubly linked list node structure
- * 
+ * for Holberton project 
  */
 typedef struct dlistint_s
 {

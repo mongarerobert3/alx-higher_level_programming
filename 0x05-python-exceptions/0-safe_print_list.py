@@ -1,10 +1,13 @@
 #!/usr/bin/python3
 
-from msilib.schema import Error
-
 
 def safe_print_list(my_list=[], x=0):
-    try:
-        print("{}".format(my_list))
-    except Error:
-        print("List is empty")
+    list_count = 0
+    for element in range (x):
+        try:
+            print("{:d}".format(my_list[element]), end="")
+            list_count += 1
+        except IndexError:
+            break
+    print("")
+    return list_count

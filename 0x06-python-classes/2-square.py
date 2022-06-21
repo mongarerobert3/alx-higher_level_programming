@@ -1,21 +1,20 @@
 #!/usr/bin/python3
-"""
-    square
-"""
+"""2-square.py"""
 
 
 class Square:
-    """defines a square"""
+    """Defines a square"""
 
     def __init__(self, size=0):
-        """Private instance attribute
-            Args:
-                size of the square
+        """
+        Creates an instance of Square
+        Args:
+            size: size of the square
         """
         if not isinstance(size, int):
             raise TypeError("size must be an integer")
 
         if size < 0:
-            raise ValueError("Size must be >= 0")
+            raise ValueError("size must be >= 0")
 
         self.__size = size

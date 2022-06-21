@@ -17,7 +17,7 @@ class Square:
     def size(self):
         """Getter and setter for private size variable"""
         return self.__size
-    
+
     @size.setter
     def size(self, value):
         if not isinstance(value, int):

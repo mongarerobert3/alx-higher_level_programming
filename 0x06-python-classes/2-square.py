@@ -1,11 +1,7 @@
 #!/usr/bin/python3
-
 """
     square
 """
-
-
-from multiprocessing.sharedctypes import Value
 
 
 class Square:

@@ -2,9 +2,6 @@
 """2-square.py"""
 
 
-from ctypes import sizeof
-
-
 class Square:
     """Defines a square"""
 

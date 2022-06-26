@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 
-from typing import Type
-
-
+"""Function to add the integers"""
 def add_integer(a, b=98):
-    if a and b != float:
-        raise TypeError("a must be an integer") or ("b must be an integer")
-    if a and b is float:
-        a = int(a)
-        b = int(b)
-        return a + b
+    """Adding the integers
+    Args:
+        a - first number input
+        b- seond number input
+    """
+
+    if type(a) not in [int, float]:
+        raise TypeError("a must be an integer")
+    elif type(b) not in [int, float]:
+        raise TypeError("b must be an integer")
+    return int(a) + int(b)

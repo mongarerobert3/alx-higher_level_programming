@@ -1,19 +1,22 @@
 #!/usr/bin/python3
 
+
 """writing a rectangle"""
+
+
 class Rectangle:
     """properties of the class"""
     def __init__(self, width=0, height=0):
         self.width = width
         self.height = height
 
-    @property 
+    @property
     def width(self):
         """Property getter, for retreiving"""
         return self.__width
-    
+
     @width.setter
-    def width (self, value):
+    def width(self, value):
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         elif value < 0:

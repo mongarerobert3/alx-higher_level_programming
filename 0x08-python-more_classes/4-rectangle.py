@@ -69,11 +69,10 @@ class Rectangle:
             if i != self.__height - 1:
                 rectangle.append("\n")
         return ("".join(rectangle))
-    
+
     def __repr__(self):
         """
         Returns the string representation of the rectangle
             Should be able to create a new instance using eval().
             """
-        return '{self.__class__.__name__}({self.width}, {self.height})'.\
-            format(self= self)
+        return "Rectangle({}, {})".format(self.width, self.height)

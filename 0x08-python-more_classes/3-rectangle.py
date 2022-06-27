@@ -2,9 +2,6 @@
 """writing a rectangle"""
 
 
-from curses.textpad import rectangle
-
-
 class Rectangle:
     """properties of the class"""
     def __init__(self, width=0, height=0):
@@ -43,7 +40,6 @@ class Rectangle:
     def area(self):
         """Area of the rectangle"""
         return self.__width * self.__height
-
 
     def perimeter(self):
         """Perimeter of the rectangle"""

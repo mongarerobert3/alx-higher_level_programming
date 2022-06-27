@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""5-rectangle.py"""
+"""Area and Perimeter"""
 
 
 class Rectangle:
@@ -18,6 +18,7 @@ class Rectangle:
             width: width of the rectangle
             height: height of the rectangle
         """
+        type(self).number_of_instances += 1
         self.width = width
         self.height = height
 

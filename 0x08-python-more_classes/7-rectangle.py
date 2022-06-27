@@ -1,13 +1,9 @@
 #!/usr/bin/python3
-"""Area and Perimeter"""
+"""7-rectangle.py"""
 
 
 class Rectangle:
-    """Defines a rectangle
-
-    Attribute:
-        number_of_instances (int): The number of Rectangle instances.
-    """
+    """Defines a rectangle"""
 
     number_of_instances = 0
     print_symbol = "#"
@@ -19,9 +15,9 @@ class Rectangle:
             width: width of the rectangle
             height: height of the rectangle
         """
-        type(self).number_of_instances += 1
         self.width = width
         self.height = height
+        Rectangle.number_of_instances += 1
 
     @property
     def width(self):
@@ -75,7 +71,8 @@ class Rectangle:
         if self.width == 0 or self.height == 0:
             return ""
 
-        result = ["#" * self.width for i in range(self.height)]
+        symbol = str(self.print_symbol)
+        result = [symbol * self.width for i in range(self.height)]
         return "\n".join(result)
 
     def __repr__(self):
@@ -84,5 +81,5 @@ class Rectangle:
 
     def __del__(self):
         """Deletes an instance of a Rectangle """
-        type(self).number_of_instances -= 1
         print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1

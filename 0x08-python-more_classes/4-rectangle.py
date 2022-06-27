@@ -6,9 +6,6 @@ Task:
 """
 
 
-from curses.textpad import rectangle
-
-
 class Rectangle:
     """Defines the implementation of a rectangle"""
 

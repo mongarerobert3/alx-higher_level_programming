@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+    Definition for a LockedClass class.
+    """
 def LockedClass():
     """A locked class that only lets the user dynamically create the instance
     attribute 'first_name'"""

@@ -2,7 +2,7 @@
 """empty class BaseGeometry."""
 
 
-class BaseGeometry():
+class BaseGeometry:
     """Instance method area"""
     def area(self):
         """Raises an exception because...

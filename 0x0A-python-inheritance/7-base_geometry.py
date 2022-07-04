@@ -16,7 +16,7 @@ class BaseGeometry:
             name(str) - input name as string
             value(int): pararams validator
         """
-        if value != type(int):
+        if type(value) != int:
             raise TypeError("{} must be an integer".format(name))
         if value <= 0:
             raise ValueError("{} must be greater than 0".format(name))

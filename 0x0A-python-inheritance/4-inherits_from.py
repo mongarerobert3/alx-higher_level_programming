@@ -9,4 +9,5 @@ def inherits_from(obj, a_class):
         Args:  obj(any): object of the class
         a_class(type): describes the class
     """
-    return isinstance(obj, a_class)
+    while type(obj) != a_class:
+        return isinstance(obj, a_class)

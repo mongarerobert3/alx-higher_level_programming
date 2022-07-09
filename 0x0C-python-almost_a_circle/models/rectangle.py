@@ -76,4 +76,33 @@ class Rectangle(Base):
                 print('' * self.__x, end='')
             print('#' * self.__width)
 
-    
+    def __str__(self):
+        """String representation of the rectangle class"""
+        str_rep = "[Rectangle] ({}) {}/{} - {} {}".format(self.id, self.x, self.y, self.__width, self.__height)
+        return str_rep
+
+    def update(self, *args, **kwargs):
+        """updating display to print to stdout"""
+        argc = len(args)
+        kwargc = len(kwargs)
+        modif_attrs = ["id", "width", "height", "x", "y"]
+
+        if argc > 5:
+            argc = 5
+
+        if argc > 0:
+            for i in range(argc):
+                setattr(self, modif_attrs[i], args[i])
+        elif kwargc > 0:
+            for k, v in kwargs.items():
+                if k in modif_attrs:
+                    setattr(self, k, v)
+        
+    def to_dictionary(self):
+        """returns the dictionary representation of a Rectangle"""
+        return {'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y}
+            

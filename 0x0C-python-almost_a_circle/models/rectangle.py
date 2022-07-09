@@ -8,7 +8,7 @@ class Rectangle(Base):
         self.__width = width
         self.__height = height
         self.__x = x
-        self__y = y
+        self.__y = y
 
     @property
     def width(self):
@@ -65,5 +65,15 @@ class Rectangle(Base):
         return self.__width * self.__height
 
     def display(self):
+        """
+            Displays # under the area covered by the rectangle
+        """
+        if self.__y > 0:
+            print('/n' * self.__y, end='')
         
+        for i in range(self.height):
+            if self.__x > 0:
+                print('' * self.__x, end='')
+            print('#' * self.__width)
 
+    

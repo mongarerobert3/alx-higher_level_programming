@@ -1,53 +1,58 @@
 #!/usr/bin/python3
-"""And now the square!"""
-
+"""The square"""
+from models.base import Base
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """class constructor"""
+    """A square class inheriting from rectangle"""
+
     def __init__(self, size, x=0, y=0, id=None):
-        """..."""
+        """Constructs the square's attributes"""
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """
-        ...
-        """
-        return '[Square] ({:d}) {:d}/{:d} - {:d}'.format(
-            self.id, self.x, self.y, self.width
-        )
+        """String method for rectangle class"""
+        str_res = ("[Square] ({}) {}/{} - {}"
+                   .format(self.id, self.x, self.y, self.width))
+        return str_res
+
+    def area(self):
+        """Returns the area of the square"""
+        return self.width ** 2
 
     @property
     def size(self):
-        """getter"""
+        """Gets the"""
         return self.width
 
     @size.setter
     def size(self, value):
+        """Sets the size of square"""
         self.width = value
         self.height = value
 
     def update(self, *args, **kwargs):
-        argc = len(args)
-        kwargc = len(kwargs)
-        modif_attrs = ['id', 'size', 'x', 'y']
-
-        if argc > 4:
-            argc = 4
-
-        if argc > 0:
-            for i in range(argc):
-                setattr(self, modif_attrs[i], args[i])
-        elif kwargc > 0:
+        """Updates the public class
+        Args:
+            *args(any): the list of arguments - no-keyworded arguments
+            **kwargs(any):
+        """
+        if not args and not kwargs:
+            return
+        if args:
+            attributes = ["id", "size", "x", "y"]
+            for i, j in enumerate(args):
+                if i < len(attributes):
+                    setattr(self, attributes[i], j)
+        else:
             for k, v in kwargs.items():
-                if k in modif_attrs:
+                if hasattr(self, k):
                     setattr(self, k, v)
 
     def to_dictionary(self):
-        """returns the dictionary representation of a Square"""
-        return {'id': self.id,
-            'size': self.width,
-            'x': self.x,
-            'y': self.y}
-    
+        """Converts to dictionary"""
+        _map = super().to_dictionary()
+        _map["size"] = _map["width"]
+        del _map["width"], _map["height"]
+        return _map

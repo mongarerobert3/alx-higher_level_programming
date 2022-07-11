@@ -1,58 +1,49 @@
 #!/usr/bin/python3
-"""The square"""
-from models.base import Base
+'''Module for Square class.'''
 from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """A square class inheriting from rectangle"""
+    '''A Square class.'''
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Constructs the square's attributes"""
+        '''Constructor.'''
         super().__init__(size, size, x, y, id)
 
     def __str__(self):
-        """String method for rectangle class"""
-        str_res = ("[Square] ({}) {}/{} - {}"
-                   .format(self.id, self.x, self.y, self.width))
-        return str_res
-
-    def area(self):
-        """Returns the area of the square"""
-        return self.width ** 2
+        '''Returns string info about this square.'''
+        return '[{}] ({}) {}/{} - {}'.\
+            format(type(self).__name__, self.id, self.x, self.y, self.width)
 
     @property
     def size(self):
-        """Gets the"""
+        '''Size of this square.'''
         return self.width
 
     @size.setter
     def size(self, value):
-        """Sets the size of square"""
         self.width = value
         self.height = value
 
+    def __update(self, id=None, size=None, x=None, y=None):
+        '''Internal method that updates instance attributes via */**args.'''
+        if id is not None:
+            self.id = id
+        if size is not None:
+            self.size = size
+        if x is not None:
+            self.x = x
+        if y is not None:
+            self.y = y
+
     def update(self, *args, **kwargs):
-        """Updates the public class
-        Args:
-            *args(any): the list of arguments - no-keyworded arguments
-            **kwargs(any):
-        """
-        if not args and not kwargs:
-            return
+        '''Updates instance attributes via no-keyword & keyword args.'''
         if args:
-            attributes = ["id", "size", "x", "y"]
-            for i, j in enumerate(args):
-                if i < len(attributes):
-                    setattr(self, attributes[i], j)
-        else:
-            for k, v in kwargs.items():
-                if hasattr(self, k):
-                    setattr(self, k, v)
+            self.__update(*args)
+        elif kwargs:
+            self.__update(**kwargs)
 
     def to_dictionary(self):
-        """Converts to dictionary"""
-        _map = super().to_dictionary()
-        _map["size"] = _map["width"]
-        del _map["width"], _map["height"]
-        return _map
+        '''Returns dictionary representation of this class.'''
+        return {"id": self.id, "size": self.width,
+                "x": self.x, "y": self.y}

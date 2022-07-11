@@ -1,31 +1,16 @@
 #!/usr/bin/python3
-"""Base class"""
-
-import json
-import os
+'''Module for Base class.'''
+from json import dumps, loads
 import csv
-import turtle
 
 
 class Base:
-    """Represents the base class
-
-    Observation:
-        The class is used to manage id attribute
-        in all your future classes and to avoid duplicating
-        the same code (by extension, same bugs)
-
-    """
+    '''A representation of the base of our OOP hierarchy.'''
 
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """Instantiates the id class with
-
-        Args:
-            id(int): the class id
-
-        """
+        '''Constructor.'''
         if id is not None:
             self.id = id
         else:
@@ -34,135 +19,110 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
-        """Returns the JSON string representation
-        of list_dictionaries
-
-        Args:
-            list_dictionaries(list): list of dictionary
-
-        """
-        if list_dictionaries is None or list_dictionaries is " ":
+        '''Jsonifies a dictionary so it's quite rightly and longer.'''
+        if list_dictionaries is None or not list_dictionaries:
             return "[]"
-        return json.dumps(list_dictionaries)
-
-    @classmethod
-    def save_to_file(cls, list_objs):
-        """ writes the JSON string representation of
-        list_objs to a file
-
-        Args:
-            list_objs(): a list of instances who inherits ofBase -
-            example: list of Rectangle or list of Square instances
-
-        """
-        if list_objs is None:
-            with open(cls.__name__ + ".json", "w") as file:
-                file.write("[]")
         else:
-            list_instance = [i.to_dictionary() for i in list_objs]
-            with open(cls.__name__ + ".json", "w") as file:
-                file.write(cls.to_json_string(list_instance))
+            return dumps(list_dictionaries)
 
     @staticmethod
     def from_json_string(json_string):
-        """Returns the list of the JSON string
-        representation json_string
-
-        Args:
-            json_string(str): a string representing a list
-            of dictionaries
-
-        """
-        if json_string is None:
+        '''Unjsonifies a dictionary.'''
+        if json_string is None or not json_string:
             return []
-        if json_string == [] or not isinstance(json_string, str):
-            return []
-        return json.loads(json_string)
+        return loads(json_string)
 
     @classmethod
-    def create(cls, **dictionary):
-        """Returns an instance with all attributes already set
-
-        Args:
-            **dictionary(pointer): can be thought of as a
-            double pointer to a dictionary
-
-        """
-        if cls.__name__ == "Rectangle":
-            result = cls(32, 3)
-            result.update(**dictionary)
-            return result
-        if cls.__name__ == "Square":
-            result = cls(32)
-            result.update(**dictionary)
-            return result
+    def save_to_file(cls, list_objs):
+        '''Saves jsonified object to file.'''
+        if list_objs is not None:
+            list_objs = [o.to_dictionary() for o in list_objs]
+        with open("{}.json".format(cls.__name__), "w", encoding="utf-8") as f:
+            f.write(cls.to_json_string(list_objs))
 
     @classmethod
     def load_from_file(cls):
-        """A class method that returns a
-        list instance
+        '''Loads string from file and unjsonifies.'''
+        from os import path
+        file = "{}.json".format(cls.__name__)
+        if not path.isfile(file):
+            return []
+        with open(file, "r", encoding="utf-8") as f:
+            return [cls.create(**d) for d in cls.from_json_string(f.read())]
 
-        """
-        list_instance = []
-        file_name = cls.__name__ + ".json"
-        if os.path.isfile(file_name):
-            with open(file_name, "r") as file:
-                s = cls.from_json_string(file.read())
-            for i in s:
-                list_instance.append(cls.create(**i))
-            return list_instance
-        return []
+    @classmethod
+    def create(cls, **dictionary):
+        '''Loads instance from dictionary.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if cls is Rectangle:
+            new = Rectangle(1, 1)
+        elif cls is Square:
+            new = Square(1)
+        else:
+            new = None
+        new.update(**dictionary)
+        return new
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """A  class method that serializes and
-        deserializes in CSV
-
-        """
-        if (list_objs is None or not isinstance(list_objs, list)
-                or not all(isinstance(j, Base) for j in list_objs)):
-            with open(cls.__name__ + ".csv", "w") as file:
-                file.write("[]")
-        if list_objs and any(isinstance(j, Base) for j in list_objs):
-            dict_data = [i.to_dictionary() for i in list_objs]
-            if cls.__name__ == "Rectangle":
-                csv_columns = ["id", "width", "height", "x", "y"]
+        '''Saves object to csv file.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        if list_objs is not None:
+            if cls is Rectangle:
+                list_objs = [[o.id, o.width, o.height, o.x, o.y]
+                             for o in list_objs]
             else:
-                csv_columns = ["id", "size", "x", "y"]
-            with open(cls.__name__ + ".csv", "w") as file:
-                writer = csv.DictWriter(file, fieldnames=csv_columns)
-                writer.writeheader()
-                for data in dict_data:
-                    writer.writerow(data)
+                list_objs = [[o.id, o.size, o.x, o.y]
+                             for o in list_objs]
+        with open('{}.csv'.format(cls.__name__), 'w', newline='',
+                  encoding='utf-8') as f:
+            writer = csv.writer(f)
+            writer.writerows(list_objs)
 
     @classmethod
     def load_from_file_csv(cls):
-        """Loads from csv file"""
-        list_instance = []
-        name = cls.__name__ + ".csv"
-        if os.path.isfile(name):
-            with open(name, "r") as file:
-                reader = csv.DictReader(file)
-                for row in reader:
-                    d = {key: int(value) for key, value in row.items()}
-                    list_instance.append(cls.create(**d))
-            return list_instance
-        return []
+        '''Loads object to csv file.'''
+        from models.rectangle import Rectangle
+        from models.square import Square
+        ret = []
+        with open('{}.csv'.format(cls.__name__), 'r', newline='',
+                  encoding='utf-8') as f:
+            reader = csv.reader(f)
+            for row in reader:
+                row = [int(r) for r in row]
+                if cls is Rectangle:
+                    d = {"id": row[0], "width": row[1], "height": row[2],
+                         "x": row[3], "y": row[4]}
+                else:
+                    d = {"id": row[0], "size": row[1],
+                         "x": row[2], "y": row[3]}
+                ret.append(cls.create(**d))
+        return ret
 
     @staticmethod
     def draw(list_rectangles, list_squares):
-        """Draws sqaures and rectangles"""
+        import turtle
+        import time
+        from random import randrange
+        turtle.Screen().colormode(255)
         for i in list_rectangles + list_squares:
-            tt = turtle.Turtle()
-            tt.shape("turtle")
-            turtle.bgcolor("black")
-            tt.fillcolor("white")
-            tt.begin_fill()
-            tt.pen(fillcolor="white", pencolor="red", pensize=2)
-            for _ in range(2):
-                tt.forward(i.width)
-                tt.right(90)
-                tt.forward(i.height)
-                tt.right(90)
-            tt.end_fill()
-            turtle.done()
+            t = turtle.Turtle()
+            t.color((randrange(255), randrange(255), randrange(255)))
+            t.pensize(1)
+            t.penup()
+            t.pendown()
+            t.setpos((i.x + t.pos()[0], i.y - t.pos()[1]))
+            t.pensize(10)
+            t.forward(i.width)
+            t.left(90)
+            t.forward(i.height)
+            t.left(90)
+            t.forward(i.width)
+            t.left(90)
+            t.forward(i.height)
+            t.left(90)
+            t.end_fill()
+
+        time.sleep(5)

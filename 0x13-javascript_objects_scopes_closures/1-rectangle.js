@@ -1,1 +1,7 @@
 #!/usr/bin/node
+
+module.exports = class Rectangle {
+    constructor(w, h);
+    w = width;
+    h = eight;
+};

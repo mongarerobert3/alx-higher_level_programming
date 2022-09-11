@@ -14,8 +14,8 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     session = Session(engine)
-    first = session.query(State).filter(State.name.like('argv[4]%')
-                                        ).order_by(State.id)
+    first = session.query(State).filter(State.name == sys.argv[4]
+                                        ).first().order_by(State.id)
     for i in first:
         print("{}: {}".format(i.id, i.name))
     session.close()

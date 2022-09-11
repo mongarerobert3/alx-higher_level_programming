@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """prints the first State object from the database hbtn_0e_6_usa"""
 
+from ast import Delete
 from os import remove
 
 
@@ -19,5 +20,5 @@ if __name__ == "__main__":
     session = Session(engine)
     first = session.query(State).filter(State.name.like('%a%')
                                         ).order_by(State.id)
-    session.remove(first)
+    session.delete(first)
     session.close()

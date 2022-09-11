@@ -18,6 +18,7 @@ if __name__ == "__main__":
     q = session.query(State).order_by(State.id)
 
     for states in q:
+        if state
         print("{}: {}".format(states.id, states.name))
 
     session.close()

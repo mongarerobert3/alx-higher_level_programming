@@ -18,7 +18,7 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     session = Session(engine)
-    first = session.query(State).filter(State.name.like('%a%')
-                                        ).order_by(State.id)
-    session.delete(first)
+    for state in session.query(State).filter(State.name.like('%a%')):
+        session.delete(state)
+        session.commit()
     session.close()

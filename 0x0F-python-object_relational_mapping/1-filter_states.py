@@ -16,7 +16,7 @@ if __name__ == "__main__":
     )
 
     cur = connection.cursor()
-    cur.execute("SELECT * FROM states WHERE name like '%N%'")
+    cur.execute("SELECT * FROM states WHERE name like BINARY 'N%'")
     query_rows = cur.fetchall()
 
     for row in query_rows:

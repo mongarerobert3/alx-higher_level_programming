@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""prints the first State object from the database hbtn_0e_6_usa"""
+"""adds the State object “Louisiana”
+to the database hbtn_0e_6_usa"""
 
 if __name__ == "__main__":
 
@@ -14,8 +15,9 @@ if __name__ == "__main__":
     Base.metadata.create_all(engine)
 
     session = Session(engine)
-    first = session.query(State).filter(State.name == sys.argv[4]
-                                        ).first().order_by(State.id)
-    for i in first:
-        print("{}: {}".format(i.id, i.name))
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
+    if state:
+        print("{}".format(state.id))
+    else:
+        print("Not found")
     session.close()

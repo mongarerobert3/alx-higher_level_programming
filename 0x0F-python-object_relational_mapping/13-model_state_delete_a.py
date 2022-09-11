@@ -19,5 +19,5 @@ if __name__ == "__main__":
     session = Session(engine)
     first = session.query(State).filter(State.name.like('%a%')
                                         ).order_by(State.id)
-    remove(first)
+    session.remove(first)
     session.close()

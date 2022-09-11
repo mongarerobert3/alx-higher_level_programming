@@ -12,7 +12,6 @@ if __name__ == "__main__":
         user=argv[1],
         passwd=argv[2],
         db=argv[3],
-        states_name_searched=argv[4]
         charset="utf8"
     )
 

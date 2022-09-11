@@ -17,11 +17,17 @@ if __name__ == "__main__":
 
     cur = connection.cursor()
     cur.execute("SELECT cities.name FROM cities\
-        JOIN states ON state_id=states.id WHERE \
-        states.name LIKE BINARY %s ORDER BY cities.id", (argv[4],))
+    JOIN states ON cities.state_id = states.id\
+    WHERE states.name = %s\
+    ORDER BY cities.id;", (argv[4], ))
     query_rows = cur.fetchall()
 
-    for row in query_rows:
-        print(row)
+    cities = []
+    temp = 0
+    for city in query_rows:
+        cities.append(query_rows[temp][0])
+        temp = temp + 1
+    final_cities = ', '.join(cities)
+    print(final_cities)
     cur.close()
     connection.close()

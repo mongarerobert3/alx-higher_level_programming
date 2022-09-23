@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-"""
-Holberton School staff evaluates candidates applying
-for a back-end position with multiple technical challenges
-"""
-from sys import argv
-import requests
+"""challenge to get commits"""
 
 
 if __name__ == "__main__":
-    r = requests.get('https://api.github.com/repos/{}/{}/commits'
-                     .format(argv[2], argv[1]))
-    l = r.json()
+    import sys
+    from requests import get, auth
+
     try:
-        for i in range(10):
-            print(l[i].get('sha'), l[i].get('commit')
-                  .get('author').get('name'), sep=": ")
-    except:
+        repo = sys.argv[1]
+        owner = sys.argv[2]
+        url = 'https://api.github.com/repos/{}/{}/commits'.format(owner, repo)
+        req = get(url)
+        json_o = req.json()
+        for i in range(0, 10):
+            print("{}: {}".format(json_o[i].get('sha'), json_o[i].get('commit')
+                                  .get('author').get('name')))
+    except Exception:
         pass

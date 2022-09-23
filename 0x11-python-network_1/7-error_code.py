@@ -1,16 +1,15 @@
 #!/usr/bin/python3
-
+"""
+Python script that takes in a URL,
+sends a request to the URL
+"""
+from sys import argv
 import requests
-import sys
+
 
 if __name__ == "__main__":
-
-    try:
-        html = requests.get(sys.argv[1])
-        html.raise_for_status()
-
-    except requests.exceptions.HTTPError:
-        print("Error code: {}".format(html.status_code))
-
+    r = requests.get(argv[1])
+    if r.status_code < 400:
+        print(r.text)
     else:
-        print(html.text)
+        print('Error code:', r.status_code)

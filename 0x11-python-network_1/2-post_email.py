@@ -12,5 +12,5 @@ if __name__ == "__main__":
     data = request.parse.urlencode({'email': sys.argv[2]}).encode('ascii')
     req = request.Request(sys.argv[1], data)
     with request.urlopen(req) as response:
-        html = r.read()
+        html = response.read()
         print('{}'.format(html.decode('utf-8')))

@@ -3,11 +3,13 @@
 
 
 def find_peak(list_of_integers):
+    """Finds a peak in list_of_integers"""
 
     if list_of_integers == [] or list_of_integers is None:
         return None
 
     def binarySearch(arr, l, r):
+        """Binary search"""
 
         if l == r:
             return l

@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/python3
 """ Finds peak in list of unsorted integers"""
 

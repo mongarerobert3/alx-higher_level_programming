@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""urllib usage"""
 import urllib.request
 import urllib.parse
 

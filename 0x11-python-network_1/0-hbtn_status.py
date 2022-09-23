@@ -1,11 +1,12 @@
 #!/usr/bin/python3
+""" Script that fetches from a url using urllib package"""
 
-from urllib.request import urlopen
+import urllib.request as request
 
 if __name__ == "__main__":
-    with urlopen('https://intranet.hbtn.io/status') as response:
-        html = response.read()
+    with request.urlopen('https://intranet.hbtn.io/status') as r:
+        html = r.read()
         print("Body response:")
-        print("{}{}".format("\t- type: ", type(html)))
-        print("{}{}".format("\t- content: ", html))
-        print("{}{}". format("\t- utf8 content: ", html.decode('utf-8')))
+        print("\t- type: {}".format(type(html)))
+        print("\t- content: {}".format(html))
+        print("\t- utf8 content: {}".format(html.decode('utf-8')))

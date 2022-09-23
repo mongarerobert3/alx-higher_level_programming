@@ -5,15 +5,13 @@ request to the passed URL with the email as a parameter, and
 displays the body of the response (decoded in utf-8)
 """
 
-import urllib.request as request
-import urllib.parse as parse
-from urllib import error
-from sys import argv
-
+import urllib.request
+import urllib.parse
+import sys
 
 if __name__ == '__main__':
-    try:
-        with request.urlopen(argv[1]) as r:
-            print(r.read().decode('utf-8'))
-    except error.HTTPError as e:
-        print("Error code: {}".format(e.code))
+    data = urllib.parse.urlencode({'email': sys.argv[2]}).encode('ascii')
+    req = urllib.request.Request(sys.argv[1], data)
+    with urllib.request.urlopen(req) as r:
+        html = r.read()
+        print('{}'.format(html.decode('utf-8')))

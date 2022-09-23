@@ -1,15 +1,19 @@
 #!/usr/bin/python3
-"""
-    Python script that takes in a URL,
-    sends a request to the URL and displays the body of the response
-"""
-import urllib.request as request
-import sys
 
+from sys import argv
+from urllib.request import Request, urlopen
+from urllib.error import URLError
 
 if __name__ == "__main__":
-    data = request.parse.urlencode({'email': sys.argv[2]}).encode('ascii')
-    req = request.Request(sys.argv[1], data)
-    with request.urlopen(req) as response:
-        html = response.read()
-        print('{}'.format(html.decode('utf-8')))
+        req = Request(argv[1])
+
+        try:
+                with urlopen(req) as response:
+                        html = response.read().decode('utf-8')
+
+        except URLError as e:
+                if hasattr(e, 'code'):
+                        print('Error code:', e.code)
+
+        else:
+                print(html)

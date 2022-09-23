@@ -1,15 +1,19 @@
 #!/usr/bin/python3
-""" Github commits code challenge"""
-
-import requests
+"""
+Holberton School staff evaluates candidates applying
+for a back-end position with multiple technical challenges
+"""
 from sys import argv
+import requests
 
-if __name__ == '__main__':
-    url = "https://api.github.com/repos/{}/{}commits"\
-          .format(argv[2], argv[1])
-    r = requests.get(url)
-    commits = r.json()
 
-    for commit in commits[:10]:
-        print(commit.get('sha'), end=': ')
-        print(commit.get('commit').get('author').get('name'))
+if __name__ == "__main__":
+    r = requests.get('https://api.github.com/repos/{}/{}/commits'
+                     .format(argv[2], argv[1]))
+    l = r.json()
+    try:
+        for i in range(10):
+            print(l[i].get('sha'), l[i].get('commit')
+                  .get('author').get('name'), sep=": ")
+    except:
+        pass

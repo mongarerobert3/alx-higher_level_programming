@@ -1,10 +1,10 @@
 #!/usr/bin/node
 
-//Star wars API
+// Star wars API
 
 // Including the request module
 const request = require('request');
-const id = (process.argv[2])
+const id = (process.argv[2]);
 const url = 'https://swapi-api.hbtn.io/api/films/' + id;
 
 request(url, function (err, res, body) {

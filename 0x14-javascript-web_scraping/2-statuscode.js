@@ -2,7 +2,7 @@
 
 // Script that display the status code of a GET request.
 
-// FileSystem
+// Including the request module
 const request = require('request');
 const url = process.argv[2];
 
@@ -11,5 +11,5 @@ request(url, function (err, response) {
     console.error(err);
     return;
   }
-  console.log('code: ', response.statusCode);
+  console.log('code:', response.statusCode);
 });

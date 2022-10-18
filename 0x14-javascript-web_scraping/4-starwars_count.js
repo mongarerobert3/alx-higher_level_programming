@@ -13,13 +13,13 @@ request(url, function (err, request, body) {
   const data = JSON.parse(body).results;
   let presentIn = 0;
 
-  for (const dataindex in data){
+  for (const dataindex in data) {
     const filmCharacters = data[dataindex].characters;
 
-    for (const charindex in filmCharacters){
-        if (filmCharacters[charindex].includes('18')){
-            presentIn++;
-        }
+    for (const charindex in filmCharacters) {
+      if (filmCharacters[charindex].includes('18')) {
+        presentIn++;
+      }
     }
   }
   console.log(presentIn);

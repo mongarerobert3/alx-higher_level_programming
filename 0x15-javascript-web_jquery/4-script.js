@@ -1,4 +1,4 @@
 const $ = window.$;
 $('DIV#toggle_header').click(function(){
-    $('header').toggleClass('green red');
+    $('UL.my_list').apped('<li>Item</li>');
 });
